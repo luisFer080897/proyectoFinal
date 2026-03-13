@@ -124,6 +124,7 @@ class TareasApp(QtWidgets.QWidget):
             self.listWidget.takeItem(fila)
  
         self._actualizar_contador()
+        self._aviso(f"Se han eliminado: {eliminadas} tareas.")
  
     def _on_limpiar(self) -> None:
         if self._repo.esta_vacia():
