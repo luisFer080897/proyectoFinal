@@ -5,4 +5,5 @@ class OpcionMenu(Enum):
     MOSTRAR = "2"
     COMPLETAR = "3"
     ELIMINAR = "4"
+
     SALIR = "5"
