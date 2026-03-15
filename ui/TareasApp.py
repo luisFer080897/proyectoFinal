@@ -2,11 +2,10 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from repository.ListaTareasRepository import ListaTareasRepository
 from model.Tarea import Tarea
  
-# 3) Widget personalizado para cada fila de tarea
 class TareaItem(QtWidgets.QListWidgetItem):
     """Representa visualmente una Tarea en el QListWidget."""
  
-    ICONO_PENDIENTE   = "⏳"
+    ICONO_PENDIENTE   = "-"
     ICONO_COMPLETADA  = "✔"
  
     def __init__(self, tarea: Tarea) -> None:
@@ -22,8 +21,6 @@ class TareaItem(QtWidgets.QListWidgetItem):
         """Llama a esto tras cambiar el estado de la tarea."""
         self._actualizar_texto()
  
- 
-# 4) Ventana principal de la aplicación
 class TareasApp(QtWidgets.QWidget):
     """Interfaz gráfica para gestionar la lista de tareas."""
  
@@ -36,10 +33,7 @@ class TareasApp(QtWidgets.QWidget):
         self._crear_widgets()
         self._crear_layout()
         self._conectar_signals()
- 
-    # ------------------------------------------------------------------
-    # Configuración inicial
-    # ------------------------------------------------------------------
+
     def _configurar_ventana(self) -> None:
         self.setWindowTitle(self.TITULO)
         self.resize(460, 400)
@@ -48,10 +42,10 @@ class TareasApp(QtWidgets.QWidget):
         self.input = QtWidgets.QLineEdit()
         self.input.setPlaceholderText("Escribe la descripción de la tarea...")
  
-        self.btnAgregar   = QtWidgets.QPushButton("➕ Agregar")
-        self.btnCompletar = QtWidgets.QPushButton("✔ Completar")
-        self.btnEliminar  = QtWidgets.QPushButton("🗑 Eliminar")
-        self.btnLimpiar   = QtWidgets.QPushButton("🧹 Limpiar todo")
+        self.btnAgregar   = QtWidgets.QPushButton("Agregar")
+        self.btnCompletar = QtWidgets.QPushButton("Completar")
+        self.btnEliminar  = QtWidgets.QPushButton("Eliminar")
+        self.btnLimpiar   = QtWidgets.QPushButton("Limpiar todo")
  
         self.listWidget = QtWidgets.QListWidget()
         self.listWidget.setSelectionMode(
@@ -83,9 +77,6 @@ class TareasApp(QtWidgets.QWidget):
         self.btnLimpiar.clicked.connect(self._on_limpiar)
         self.input.returnPressed.connect(self._on_agregar)
  
-    # ------------------------------------------------------------------
-    # Slots (manejadores de eventos)
-    # ------------------------------------------------------------------
     def _on_agregar(self) -> None:
         descripcion = self.input.text().strip()
         if not descripcion:
@@ -135,10 +126,7 @@ class TareasApp(QtWidgets.QWidget):
             self._repo.limpiar()
             self.listWidget.clear()
             self._actualizar_contador()
- 
-    # ------------------------------------------------------------------
-    # Helpers de UI
-    # ------------------------------------------------------------------
+
     def _filas_seleccionadas(self) -> list[int]:
         return [idx.row() for idx in self.listWidget.selectedIndexes()]
  

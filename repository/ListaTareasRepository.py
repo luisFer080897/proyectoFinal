@@ -1,7 +1,6 @@
 from typing import List
 from model.Tarea import Tarea
 
-# 2) Lógica de negocio
 class ListaTareasRepository:
     def __init__(self) -> None:
         self._tareas: List[Tarea] = []
